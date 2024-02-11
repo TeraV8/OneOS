@@ -1,4 +1,11 @@
 Interrupts
-
-     I ah al
-    10 0e xx Teletype output
+     I ah 
+    10 00 al Set video mode (activate $al)
+    10 01 cx Set cursor shape
+    10 02 dx Set cursor position (x:$dl,y:$dh)
+    10 06 al Scroll up
+    10 07 al Scroll down
+    10 09 al,bl Write character + attribute
+    10 0a al Write character no attrib
+    10 0d al,cx,dx Write pixel (color $al, x:$cx, y:$cy)
+    10 0e al Teletype output (print $al)
