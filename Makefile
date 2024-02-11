@@ -2,7 +2,8 @@
 SRCDIR=src
 BUILDDIR=build
 
-all: $(BUILDDIR)/boot.bin
+all: $(BUILDDIR)/disk-full.bin
+bootsector: $(BUILDDIR)/boot.bin
 
 $(BUILDDIR):
 	mkdir -pv $(BUILDDIR)
