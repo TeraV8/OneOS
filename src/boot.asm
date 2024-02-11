@@ -1,6 +1,8 @@
 [bits 16]
 [org 0x7c00]
 
+call clearScreen
+
 mov si, STR_TEST_MESSAGE
 call printStr
 
