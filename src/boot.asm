@@ -22,7 +22,7 @@ times 6 db 0
 
 %include "boot-core.asm"
 
-STR_TEST_MESSAGE: db "              There is no message, but this is a nice error screen.", 0
+STR_TEST_MESSAGE: db "               There is no error, but this is a nice error screen.", 0
 
 ; Pad out the second boot section
 times 440 - ($ - $$) db 0
