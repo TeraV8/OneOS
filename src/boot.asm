@@ -1,6 +1,10 @@
 [bits 16]
 [org 0x7c00]
 
+; Set display resolution (don't change in bootsector!)
+mov ax, 0x0003
+int 0x10
+
 ;mov bh, 0x07
 ;call clearScreen
 
