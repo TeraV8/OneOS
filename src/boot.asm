@@ -30,7 +30,18 @@ times 440 - ($ - $$) db 0
 dw 0x0000, 0x0000
 ; Copy protection (0x5a5a to copy protect)
 dw 0x0000
-; Partition entries
-times 64 db 0
+; Partition entry 1 -- boot volume
+db 0x80 ; bootable flag
+db 0xFF, 0xFF, 0xFF ; CHS start address
+db 0x00 ; partition type
+db 0xFF, 0xFF, 0xFF ; CHS end address
+dw 0x0001, 0x0000 ; first logical block
+dw 0x07FF, 0x0000 ; size in logical blocks
+; Partition entry 2
+times 16 db 0
+; Partition entry 3
+times 16 db 0
+; Partition entry 4
+times 16 db 0
 ; Boot signature
 dw 0xaa55
