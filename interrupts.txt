@@ -9,3 +9,4 @@ Interrupts
     10 0a al Write character no attrib
     10 0d al,cx,dx Write pixel (color $al, x:$cx, y:$cy)
     10 0e al Teletype output (print $al)
+	13 02 al,cx,dx,es:bx Read disk sectors (count $al, cyl+sect $cx, head $dh, drive $dl, ptr $es:$bx)
