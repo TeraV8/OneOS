@@ -24,7 +24,7 @@ call printHex16
 call println
 
 call testA20
-jne goodA20
+je goodA20
 
 mov si, STR_INFO_A20TRY
 call logOutput
