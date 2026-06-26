@@ -125,7 +125,18 @@ STR_BAD_LOADER: db "Loader not present", 0
 STR_BAD_LDRSUM: db "Loader is corrupted", 0
 STR_LOADER_OK: db "Loader passed checksum", 0
 
-times (510 - ($ - $$)) db 0
+times (440 - ($ - $$)) db 0
+; MBR table - signature + reserved
+db "One1"
+dw 0
+; partition entry 1
+db 0x80, 0, 0, 0
+db 6, 0, 0, 0
+dd 2048
+dd 2095104
+; partition entries 2-4
+times 48 db 0
+
 dw 0xaa55
 
 %include "shared.asm"
