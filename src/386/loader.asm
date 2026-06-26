@@ -3,7 +3,7 @@
 [ORG 0x8200]
 
 dw 0xaa55
-resw 1
+CHECKSUM: resw 1
 
 call println
 mov si, STR_STAT_LOADER_OK
@@ -23,7 +23,39 @@ mov ax, EOT_ADDR
 call printHex16
 call println
 
+call testA20
+cmp al, 0
+jne goodA20
+
+mov si, STR_INFO_A20TRY
+call logOutput
+
 jmp $
+
+goodA20:
+    mov si, STR_INFO_A20OK
+    call logOutput
+
+jmp $
+
+testA20:
+    push es
+    push di
+    push bx
+    cli
+    xor bx, bx
+    not bx
+    mov es, bx
+    mov di, CHECKSUM + 0x10
+    mov bx, [es:di]
+    not [CHECKSUM]
+    cmp bx, [es:di]
+    setne al
+    sti
+    pop bx
+    pop di
+    pop es
+    ret
 
 logOutput:
     push si
@@ -107,6 +139,9 @@ STR_TEMP_LOADER: db "loader: ", 0
 STR_STAT_LOADER_OK: db "Loader successfully initialized!", 0
 STR_INFO_BOOTDISK: db "Boot disk: 0x", 0
 STR_INFO_EOTLABEL: db "End of text address: 0x", 0
+STR_INFO_A20OK: db "A20 line is enabled!", 0
+STR_INFO_A20TRY: db "Enabling A20 line...", 0
+STR_INFO_A20BAD: db "Couldn't enable A20 line!", 0
 HEXTABLE: db "0123456789abcdef"
 
 EOT_ADDR:
