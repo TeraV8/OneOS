@@ -24,7 +24,6 @@ call printHex16
 call println
 
 call testA20
-cmp al, 0
 jne goodA20
 
 mov si, STR_INFO_A20TRY
@@ -50,7 +49,6 @@ testA20:
     mov bx, [es:di]
     not [CHECKSUM]
     cmp bx, [es:di]
-    setne al
     sti
     pop bx
     pop di
